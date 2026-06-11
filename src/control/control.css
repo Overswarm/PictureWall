@@ -99,11 +99,17 @@ footer {
 .btn.big { font-size: 1.02rem; padding: 10px 20px; }
 .btn.icon { padding: 8px 12px; font-size: 1rem; }
 .btn.subtle { background: transparent; border-color: var(--card-edge); color: var(--dim); }
+.btn.danger {
+  background: linear-gradient(135deg, #d8456b, #b03050);
+  border-color: transparent;
+}
+.btn.danger:hover { filter: brightness(1.12); }
 
 .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .row.spread { justify-content: space-between; margin-top: 10px; }
 
 .dim { color: var(--dim); }
+.mt12 { margin-top: 12px; }
 .mono { font-variant-numeric: tabular-nums; }
 .hidden { display: none !important; }
 

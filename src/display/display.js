@@ -397,6 +397,7 @@
       provider,
       getSetting: (k) => getSceneSetting(sceneId, k),
       globals: getGlobals,
+      fit: () => !!(state && state.settings.fitPhotos),
     });
     scene.start();
     scene.resize(cssW, cssH);

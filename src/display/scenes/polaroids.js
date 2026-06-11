@@ -88,8 +88,12 @@
 
     _drawPolaroid(ctx, it) {
       const m = it.w * 0.06; // frame margin
-      const photo = it.w - m * 2;
-      const fh = m + photo + it.w * 0.2; // taller bottom strip
+      const pw = it.w - m * 2;
+      // Polaroids are square by default; in whole-photo mode the window
+      // follows the photo's shape (within reason, to stay polaroid-like).
+      const ar = this.env.fit() ? util.clamp(it.img.width / it.img.height, 0.55, 1.8) : 1;
+      const ph = pw / ar;
+      const fh = m + ph + it.w * 0.2; // taller bottom strip
       ctx.save();
       ctx.globalAlpha = it.alpha;
       ctx.translate(it.x, it.y);
@@ -100,7 +104,7 @@
       ctx.fillStyle = '#faf7f0';
       ctx.fillRect(-it.w / 2, -fh / 2, it.w, fh);
       ctx.shadowColor = 'transparent';
-      util.cover(ctx, it.img, -it.w / 2 + m, -fh / 2 + m, photo, photo);
+      util.cover(ctx, it.img, -it.w / 2 + m, -fh / 2 + m, pw, ph);
       ctx.restore();
     }
 

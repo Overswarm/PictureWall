@@ -14,6 +14,7 @@ const VALID_SEND = new Set([
   'control:playlist',
   'control:transport',
   'control:open-display',
+  'control:stop-show',
   'control:toggle-fullscreen',
   'display:toggle-fullscreen',
   'display:exit-fullscreen',

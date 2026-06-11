@@ -7,11 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win"
+    "dist": "npx --yes electron-builder@26 --win"
   },
   "devDependencies": {
-    "electron": "^31.3.0",
-    "electron-builder": "^24.13.3"
+    "electron": "^42.4.0"
   },
   "build": {
     "appId": "com.picturewall.app",

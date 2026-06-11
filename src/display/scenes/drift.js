@@ -121,7 +121,7 @@
         const img = it.img;
         const scl = 1 + this.pulse * 0.05;
         const h = it.hgt * scl;
-        const ar = util.clamp(img.width / img.height, 0.6, 1.8);
+        const ar = util.cardAspect(img, this.env.fit(), 0.6, 1.8);
         const w = h * ar;
         ctx.save();
         ctx.globalAlpha = it.alpha;

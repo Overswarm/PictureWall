@@ -51,7 +51,7 @@ const SCENE_DEFS = [
     id: 'city',
     name: 'City Drive',
     emoji: '🌃',
-    blurb: 'Cruise down a neon city street at night, where your photos light up the billboards.',
+    blurb: 'Cruise down a winding neon street at night — your photos light up billboards, angled signs, and the walls of the buildings you drive past.',
     settings: [
       { key: 'speed', label: 'Driving speed', type: 'range', min: 5, max: 100, step: 5, default: 40 },
       { key: 'density', label: 'Billboard density', type: 'range', min: 10, max: 100, step: 5, default: 55 },

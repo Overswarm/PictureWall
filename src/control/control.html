@@ -18,6 +18,7 @@
     </div>
     <div class="header-actions">
       <button id="btn-start-show" class="btn primary big">▶ &nbsp;Start show</button>
+      <button id="btn-stop-show" class="btn danger big hidden">■ &nbsp;Stop show</button>
       <button id="btn-fullscreen" class="btn" title="Toggle fullscreen on the show window" disabled>⛶ Fullscreen</button>
     </div>
   </header>
@@ -96,6 +97,11 @@
           <span id="max-switch-val" class="mono dim">10 s</span>
         </div>
         <p class="hint">Between those two times, photos change on the beat of the music.</p>
+        <label class="check mt12">
+          <input type="checkbox" id="opt-fit-photos" />
+          Always show the whole photo (no cropping)
+        </label>
+        <p class="hint">Tall or extra-wide photos are shown complete, framed by a soft blurred backdrop instead of being cropped to fill the space.</p>
         <div class="slider-row">
           <label for="sensitivity">Beat sensitivity</label>
           <input type="range" id="sensitivity" min="0" max="100" value="50" />

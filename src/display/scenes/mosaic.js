@@ -113,7 +113,11 @@
         ctx.save();
         ctx.translate(x + w / 2, y + h / 2);
         ctx.scale(Math.max(0.001, sx), 1);
-        util.cover(ctx, c.img, -w / 2, -h / 2, w, h);
+        if (this.env.fit()) {
+          util.fitDraw(ctx, c.img, -w / 2, -h / 2, w, h, 0.45);
+        } else {
+          util.cover(ctx, c.img, -w / 2, -h / 2, w, h);
+        }
         ctx.restore();
       }
 

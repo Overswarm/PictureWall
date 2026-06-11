@@ -30,6 +30,7 @@ function defaultState() {
       maxSwitchSec: 10,
       beatSensitivity: 50,
       prioritizeNew: true,
+      fitPhotos: false,
       volume: 80,
       loopPlaylist: true,
       shufflePlaylist: false,
@@ -386,6 +387,9 @@ function registerIpc() {
   });
 
   ipcMain.on('control:open-display', () => createDisplayWindow());
+  ipcMain.on('control:stop-show', () => {
+    if (displayWin && !displayWin.isDestroyed()) displayWin.close();
+  });
   ipcMain.on('control:toggle-fullscreen', toggleDisplayFullscreen);
   ipcMain.on('display:toggle-fullscreen', toggleDisplayFullscreen);
   ipcMain.on('display:exit-fullscreen', () => {

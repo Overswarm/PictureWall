@@ -7,11 +7,13 @@
 
   const els = {
     startShow: $('btn-start-show'),
+    stopShow: $('btn-stop-show'),
     fullscreen: $('btn-fullscreen'),
     chooseFolder: $('btn-choose-folder'),
     folderPath: $('folder-path'),
     photoCount: $('photo-count'),
     prioritizeNew: $('opt-prioritize-new'),
+    fitPhotos: $('opt-fit-photos'),
     thumbs: $('thumbs'),
     addMusic: $('btn-add-music'),
     clearMusic: $('btn-clear-music'),
@@ -185,6 +187,7 @@
     els.folderPath.textContent = state.photoFolder || 'No folder chosen yet';
     els.folderPath.classList.toggle('dim', !state.photoFolder);
     els.prioritizeNew.checked = !!s.prioritizeNew;
+    els.fitPhotos.checked = !!s.fitPhotos;
     els.loop.checked = !!s.loopPlaylist;
     els.shuffle.checked = !!s.shufflePlaylist;
     setIfIdle(els.volume, s.volume);
@@ -214,7 +217,8 @@
   function renderDisplayState() {
     els.displayState.textContent = displayOpen ? 'Show window: open' : 'Show window: closed';
     els.fullscreen.disabled = !displayOpen;
-    els.startShow.textContent = displayOpen ? '✓ Show is live' : '▶  Start show';
+    els.startShow.classList.toggle('hidden', displayOpen);
+    els.stopShow.classList.toggle('hidden', !displayOpen);
   }
 
   // ------------------------------------------------------------ thumbs ----
@@ -257,10 +261,12 @@
   // ------------------------------------------------------------- wires ----
 
   els.startShow.addEventListener('click', () => window.pw.send('control:open-display'));
+  els.stopShow.addEventListener('click', () => window.pw.send('control:stop-show'));
   els.fullscreen.addEventListener('click', () => window.pw.send('control:toggle-fullscreen'));
 
   els.chooseFolder.addEventListener('click', () => window.pw.invoke('dialog:choose-folder'));
   els.prioritizeNew.addEventListener('change', () => sendSettings({ prioritizeNew: els.prioritizeNew.checked }));
+  els.fitPhotos.addEventListener('change', () => sendSettings({ fitPhotos: els.fitPhotos.checked }));
 
   els.addMusic.addEventListener('click', () => window.pw.invoke('dialog:add-music'));
   els.clearMusic.addEventListener('click', () => window.pw.send('control:playlist', { action: 'clear' }));

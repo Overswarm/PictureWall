@@ -64,6 +64,7 @@
 
     _drawPhoto(ctx, img, kb, alpha) {
       const { W, H } = this;
+      const fit = this.env.fit();
       const drift = this.s('drift') / 100;
       const p = Math.min(1, kb.t / 30);
       const zoomMax = 1.04 + drift * 0.10;
@@ -72,13 +73,25 @@
         : zoomMax - (zoomMax - 1) * p;
       const pulseAmt = this.s('pulse') / 100;
       const z = zoom * (1 + this.pulse * 0.045 * pulseAmt);
-      const ox = kb.dx * drift * W * 0.03 * p;
-      const oy = kb.dy * drift * H * 0.03 * p;
-      const s = Math.max(W / img.width, H / img.height) * z;
-      const dw = img.width * s;
-      const dh = img.height * s;
       ctx.globalAlpha = alpha;
-      ctx.drawImage(img, (W - dw) / 2 + ox, (H - dh) / 2 + oy, dw, dh);
+      if (fit) {
+        // Whole photo letterboxed over a fixed blurred backdrop. Only the
+        // beat pulse moves the photo, inside a margin so it never crops.
+        util.blurBg(ctx, img, 0, 0, W, H, 0.55);
+        const pz = 1 + this.pulse * 0.045 * pulseAmt;
+        ctx.save();
+        ctx.translate(W / 2, H / 2);
+        ctx.scale(pz, pz);
+        util.contain(ctx, img, -W * 0.475, -H * 0.475, W * 0.95, H * 0.95);
+        ctx.restore();
+      } else {
+        const ox = kb.dx * drift * W * 0.03 * p;
+        const oy = kb.dy * drift * H * 0.03 * p;
+        const s = Math.max(W / img.width, H / img.height) * z;
+        const dw = img.width * s;
+        const dh = img.height * s;
+        ctx.drawImage(img, (W - dw) / 2 + ox, (H - dh) / 2 + oy, dw, dh);
+      }
       ctx.globalAlpha = 1;
     }
 

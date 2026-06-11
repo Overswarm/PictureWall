@@ -5,6 +5,7 @@
   'use strict';
 
   const PW = (window.PW = window.PW || {});
+  const bgCache = new WeakMap();
 
   PW.scenes = {
     defs: {},
@@ -36,6 +37,57 @@
       ctx.clip();
       ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
       ctx.restore();
+    },
+
+    // Draw an image fully inside the rect (letterboxed, never cropped).
+    contain(ctx, img, x, y, w, h) {
+      const iw = img.width;
+      const ih = img.height;
+      if (!iw || !ih) return;
+      const s = Math.min(w / iw, h / ih);
+      const dw = iw * s;
+      const dh = ih * s;
+      ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
+    },
+
+    // Whole-photo mode: blurred, darkened version of the image fills the
+    // rect, with the complete photo letterboxed on top. The blur comes free
+    // from stretching a tiny downscaled copy (cached per image).
+    blurBg(ctx, img, x, y, w, h, dark = 0.5) {
+      let bg = bgCache.get(img);
+      if (!bg) {
+        bg = document.createElement('canvas');
+        // Two-step downscale for a smooth, blocky-free blur when upscaled.
+        const mid = document.createElement('canvas');
+        mid.width = 64;
+        mid.height = Math.max(1, Math.round((64 * img.height) / img.width));
+        mid.getContext('2d').drawImage(img, 0, 0, mid.width, mid.height);
+        bg.width = 16;
+        bg.height = Math.max(1, Math.round((16 * img.height) / img.width));
+        bg.getContext('2d').drawImage(mid, 0, 0, bg.width, bg.height);
+        bgCache.set(img, bg);
+      }
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, w, h);
+      ctx.clip();
+      const s = Math.max(w / bg.width, h / bg.height) * 1.1;
+      ctx.drawImage(bg, x + (w - bg.width * s) / 2, y + (h - bg.height * s) / 2, bg.width * s, bg.height * s);
+      ctx.fillStyle = `rgba(0,0,0,${dark})`;
+      ctx.fillRect(x, y, w, h);
+      ctx.restore();
+    },
+
+    fitDraw(ctx, img, x, y, w, h, dark = 0.5) {
+      this.blurBg(ctx, img, x, y, w, h, dark);
+      this.contain(ctx, img, x, y, w, h);
+    },
+
+    // Pick a card aspect ratio for an image: tight clamp when cropping is
+    // fine, generous clamp in whole-photo mode so nothing gets cut off.
+    cardAspect(img, fit, lo, hi) {
+      const ar = img.width / img.height || 1;
+      return fit ? this.clamp(ar, 0.4, 2.6) : this.clamp(ar, lo, hi);
     },
 
     roundRect(ctx, x, y, w, h, r) {

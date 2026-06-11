@@ -93,7 +93,7 @@
         const bounceScale = isFront ? 1 + this.bounce * 0.09 : 1;
         const img = p.s.img;
         const baseH = H * 0.44 * scale * bounceScale;
-        const ar = util.clamp(img.width / img.height, 0.6, 1.7);
+        const ar = util.cardAspect(img, this.env.fit(), 0.6, 1.7);
         const baseW = baseH * ar;
         const y = cy + (1 - t) * H * 0.05;
         const border = Math.max(3, baseH * 0.035);

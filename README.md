@@ -54,7 +54,7 @@ Supported image types: JPG, PNG, GIF, WebP, BMP, AVIF.
 | 📸 **Polaroid Pile** | Snapshots tumble onto the table and pile up, covering older ones. Has its own *photo drop rate*. |
 | 🧩 **Photo Wall** | A grid of tiles that flip to new photos on every beat, with a color wash that rides the music. |
 | 🎠 **Carousel** | Photos orbit the screen, each swinging up front for its moment. The front card bounces on the beat. |
-| 🌃 **City Drive** | An endless night drive down a neon street — your photos are the billboards. Speed rides the music. |
+| 🌃 **City Drive** | An endless night drive down a winding neon street — photos appear on billboards, angled roadside signs, and as murals on the buildings you pass. Speed rides the music. |
 | 🎈 **Floating Lights** | Photos drift upward like glowing lanterns over a bokeh sky. |
 
 Every scene has its own settings (drop rate, columns, speed, glow, …), plus
@@ -62,6 +62,8 @@ global controls:
 
 - **Photos stay at least / change within** — the minimum and maximum time a
   photo stays up. Between those two, photos change *on the beat*.
+- **Always show the whole photo** — never crop a picture to fill the space;
+  tall and extra-wide photos are framed by a soft blurred backdrop instead.
 - **Beat sensitivity** — raise it if the show feels sleepy, lower it if it's
   too jumpy.
 
