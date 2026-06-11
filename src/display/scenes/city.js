@@ -454,34 +454,32 @@
       ctx.fillStyle = gnd;
       ctx.fillRect(0, horizon, W, H - horizon);
 
-      // Road, drawn as strips so it follows the curve. Far to near.
+      // Road, drawn as smooth continuous ribbons following the curve.
+      // (No dashes or banding: anything tied to discrete z-steps pops
+      // visibly as the camera advances, which reads as jitter.)
       const edgeA = (0.28 + this.beatGlow * 0.35 * neon).toFixed(3);
-      for (let d = FAR - STEP; d >= NEAR; d -= STEP) {
-        const dA = d;
-        const dB = d + STEP;
-        const yA = Math.min(H + 80, SY(GROUND_Y, dA));
-        const yB = SY(GROUND_Y, dB);
-        const quad = (xwL, xwR) => {
-          ctx.beginPath();
-          ctx.moveTo(SX(xwL, dA), yA);
-          ctx.lineTo(SX(xwR, dA), yA);
-          ctx.lineTo(SX(xwR, dB), yB);
-          ctx.lineTo(SX(xwL, dB), yB);
-          ctx.closePath();
-          ctx.fill();
-        };
-        ctx.fillStyle = Math.floor((this.z + dA) / 7) % 2 ? '#171420' : '#141121';
-        quad(-ROAD_HALF, ROAD_HALF);
-        // Edge lines.
-        ctx.fillStyle = `rgba(120,220,255,${edgeA})`;
-        quad(-ROAD_HALF, -ROAD_HALF + 0.32);
-        quad(ROAD_HALF - 0.32, ROAD_HALF);
-        // Centre dashes.
-        if (((this.z + dA) % 6) < 2.6) {
-          ctx.fillStyle = `rgba(255,210,110,${util.clamp((FAR - dA) / 30, 0, 0.8).toFixed(3)})`;
-          quad(-0.14, 0.14);
+      const ribbon = (xwL, xwR) => {
+        ctx.beginPath();
+        let first = true;
+        for (let d = FAR; d >= NEAR; d -= STEP) {
+          const x = SX(xwL, d);
+          const y = Math.min(H + 80, SY(GROUND_Y, d));
+          if (first) { ctx.moveTo(x, y); first = false; } else ctx.lineTo(x, y);
         }
-      }
+        for (let d = NEAR; d <= FAR; d += STEP) {
+          ctx.lineTo(SX(xwR, d), Math.min(H + 80, SY(GROUND_Y, d)));
+        }
+        ctx.closePath();
+        ctx.fill();
+      };
+      ctx.fillStyle = '#151221';
+      ribbon(-ROAD_HALF, ROAD_HALF);
+      ctx.fillStyle = `rgba(120,220,255,${edgeA})`;
+      ribbon(-ROAD_HALF, -ROAD_HALF + 0.32);
+      ribbon(ROAD_HALF - 0.32, ROAD_HALF);
+      // Solid centre line instead of dashes — perfectly steady.
+      ctx.fillStyle = 'rgba(255,210,110,0.3)';
+      ribbon(-0.11, 0.11);
 
       // Roadside objects, far to near.
       const visible = this.lots

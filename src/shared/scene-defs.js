@@ -59,6 +59,38 @@ const SCENE_DEFS = [
     ],
   },
   {
+    id: 'snow',
+    name: 'Snowfall',
+    emoji: '❄️',
+    blurb: 'Photos drift gently down through falling snow on a quiet winter night.',
+    settings: [
+      { key: 'count', label: 'Photos on screen', type: 'range', min: 3, max: 15, step: 1, default: 7 },
+      { key: 'speed', label: 'Fall speed', type: 'range', min: 5, max: 100, step: 5, default: 35 },
+      { key: 'snow', label: 'Snow amount', type: 'range', min: 0, max: 100, step: 5, default: 60 },
+    ],
+  },
+  {
+    id: 'book',
+    name: 'Photo Book',
+    emoji: '📖',
+    blurb: 'A big photo album lies open on the table, turning its pages in time with the music.',
+    settings: [
+      { key: 'size', label: 'Book size', type: 'range', min: 40, max: 90, step: 5, default: 65 },
+      { key: 'turnSpeed', label: 'Page turn speed', type: 'range', min: 0, max: 100, step: 5, default: 50 },
+    ],
+  },
+  {
+    id: 'warp',
+    name: 'Warp Speed',
+    emoji: '🚀',
+    blurb: 'Photos race toward you out of a streaking starfield, flying past on the beat.',
+    settings: [
+      { key: 'count', label: 'Photos on screen', type: 'range', min: 4, max: 16, step: 1, default: 8 },
+      { key: 'speed', label: 'Fly speed', type: 'range', min: 5, max: 100, step: 5, default: 40 },
+      { key: 'streaks', label: 'Star streaks', type: 'range', min: 0, max: 100, step: 5, default: 60 },
+    ],
+  },
+  {
     id: 'drift',
     name: 'Floating Lights',
     emoji: '🎈',
