@@ -1,0 +1,38 @@
+{
+  "name": "picturewall",
+  "version": "1.0.0",
+  "description": "A music-reactive photo slideshow for big screens at events, weddings, and parties.",
+  "main": "main.js",
+  "author": "PictureWall",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^31.3.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.picturewall.app",
+    "productName": "PictureWall",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    }
+  }
+}

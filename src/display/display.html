@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' blob:; media-src 'self' blob:; style-src 'self'" />
+  <title>PictureWall — Show</title>
+  <link rel="stylesheet" href="display.css" />
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <audio id="player"></audio>
+
+  <div id="empty" class="overlay hidden">
+    <div class="overlay-box">
+      <div class="overlay-emoji">📁</div>
+      <h1>Waiting for photos…</h1>
+      <p>In the PictureWall control window, click <strong>Choose photo folder</strong><br />
+         and point it at a folder of pictures.</p>
+      <p class="dim">Any photos added to that folder while the show is running<br />
+         will appear on screen automatically.</p>
+    </div>
+  </div>
+
+  <div id="hint" class="overlay-hint">
+    Press <strong>F</strong> for fullscreen &nbsp;·&nbsp; <strong>Esc</strong> to exit &nbsp;·&nbsp; <strong>Space</strong> to play / pause
+  </div>
+
+  <script src="../shared/scene-defs.js"></script>
+  <script src="scenes/base.js"></script>
+  <script src="scenes/classic.js"></script>
+  <script src="scenes/polaroids.js"></script>
+  <script src="scenes/mosaic.js"></script>
+  <script src="scenes/carousel.js"></script>
+  <script src="scenes/city.js"></script>
+  <script src="scenes/drift.js"></script>
+  <script src="display.js"></script>
+</body>
+</html>

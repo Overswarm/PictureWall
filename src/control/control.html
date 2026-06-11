@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' blob:; style-src 'self'" />
+  <title>PictureWall</title>
+  <link rel="stylesheet" href="control.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="brand-emoji">📸</span>
+      <div>
+        <h1>PictureWall</h1>
+        <p class="tagline">Music-reactive photo show for big screens</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="btn-start-show" class="btn primary big">▶ &nbsp;Start show</button>
+      <button id="btn-fullscreen" class="btn" title="Toggle fullscreen on the show window" disabled>⛶ Fullscreen</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="col">
+      <section class="card" id="card-photos">
+        <h2>📁 Photos</h2>
+        <div class="row">
+          <button id="btn-choose-folder" class="btn">Choose photo folder…</button>
+          <span id="folder-path" class="path dim">No folder chosen yet</span>
+        </div>
+        <p class="hint">Drop new pictures into this folder at any time — even while the show is running —
+           and they’ll appear on the big screen automatically.</p>
+        <div class="row spread">
+          <span id="photo-count" class="chip">0 photos</span>
+          <label class="check"><input type="checkbox" id="opt-prioritize-new" /> Show new photos right away</label>
+        </div>
+        <div id="thumbs"></div>
+      </section>
+
+      <section class="card" id="card-music">
+        <h2>🎵 Music</h2>
+        <div class="row">
+          <button id="btn-add-music" class="btn">Add music…</button>
+          <button id="btn-clear-music" class="btn subtle">Clear list</button>
+        </div>
+        <ul id="playlist"><li class="empty">No songs yet — add one or more music files (.mp3, .wav, …).<br/>
+          <span class="dim">No music? The show still runs as a regular slideshow.</span></li></ul>
+
+        <div class="transport">
+          <button id="btn-prev" class="btn icon" title="Previous song">⏮</button>
+          <button id="btn-play" class="btn icon primary" title="Play / pause">▶</button>
+          <button id="btn-next" class="btn icon" title="Next song">⏭</button>
+          <input type="range" id="seek" min="0" max="1000" value="0" />
+          <span id="time" class="dim mono">0:00 / 0:00</span>
+        </div>
+
+        <div class="row spread">
+          <div class="now-playing">
+            <span id="beat-dot"></span>
+            <span id="now-playing" class="dim">Nothing playing</span>
+            <span id="bpm" class="chip hidden"></span>
+          </div>
+          <div class="row">
+            <label class="check"><input type="checkbox" id="opt-loop" /> Repeat all</label>
+            <label class="check"><input type="checkbox" id="opt-shuffle" /> Shuffle</label>
+          </div>
+        </div>
+
+        <div class="slider-row">
+          <label for="volume">Volume</label>
+          <input type="range" id="volume" min="0" max="100" value="80" />
+          <span id="volume-val" class="mono dim">80%</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="card" id="card-scene">
+        <h2>🎬 Scene</h2>
+        <div id="scene-list"></div>
+        <div id="scene-settings"></div>
+      </section>
+
+      <section class="card" id="card-show">
+        <h2>⚙️ Show settings</h2>
+        <div class="slider-row">
+          <label for="min-switch">Photos stay at least</label>
+          <input type="range" id="min-switch" min="1" max="30" value="4" />
+          <span id="min-switch-val" class="mono dim">4 s</span>
+        </div>
+        <div class="slider-row">
+          <label for="max-switch">…and change within</label>
+          <input type="range" id="max-switch" min="2" max="60" value="10" />
+          <span id="max-switch-val" class="mono dim">10 s</span>
+        </div>
+        <p class="hint">Between those two times, photos change on the beat of the music.</p>
+        <div class="slider-row">
+          <label for="sensitivity">Beat sensitivity</label>
+          <input type="range" id="sensitivity" min="0" max="100" value="50" />
+          <span id="sensitivity-val" class="mono dim">50</span>
+        </div>
+        <p class="hint">Raise this if the show feels sleepy, lower it if it’s too jumpy.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span id="display-state" class="dim">Show window: closed</span>
+    <span class="dim">Tip: on the show window, press <strong>F</strong> for fullscreen.</span>
+  </footer>
+
+  <script src="../shared/scene-defs.js"></script>
+  <script src="control.js"></script>
+</body>
+</html>
