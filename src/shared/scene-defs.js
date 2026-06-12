@@ -48,14 +48,14 @@ const SCENE_DEFS = [
     ],
   },
   {
-    id: 'city',
-    name: 'City Drive',
-    emoji: '🌃',
-    blurb: 'Cruise down a winding neon street at night — your photos light up billboards, angled signs, and the walls of the buildings you drive past.',
+    id: 'fireworks',
+    name: 'Fireworks',
+    emoji: '🎆',
+    blurb: 'Rockets climb into the night sky and explode into showers of sparks — and every burst blooms into one of your photos.',
     settings: [
-      { key: 'speed', label: 'Driving speed', type: 'range', min: 5, max: 100, step: 5, default: 40 },
-      { key: 'density', label: 'Billboard density', type: 'range', min: 10, max: 100, step: 5, default: 55 },
-      { key: 'neon', label: 'Neon glow', type: 'range', min: 0, max: 100, step: 5, default: 60 },
+      { key: 'launchRate', label: 'Fireworks per minute', type: 'range', min: 4, max: 40, step: 1, default: 14 },
+      { key: 'size', label: 'Photo size', type: 'range', min: 20, max: 60, step: 2, default: 38 },
+      { key: 'sparks', label: 'Spark intensity', type: 'range', min: 0, max: 100, step: 5, default: 70 },
     ],
   },
   {

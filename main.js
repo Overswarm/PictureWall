@@ -4,6 +4,7 @@ const { app, BrowserWindow, ipcMain, dialog, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const fsp = fs.promises;
+const { SCENE_DEFS } = require('./src/shared/scene-defs');
 
 const PHOTO_EXTS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.avif', '.jfif']);
 const AUDIO_FILTER = {
@@ -55,6 +56,7 @@ function loadState() {
       sceneSettings: raw.sceneSettings || {},
     };
     if (state.photoFolder && !fs.existsSync(state.photoFolder)) state.photoFolder = null;
+    if (!SCENE_DEFS.some((d) => d.id === state.sceneId)) state.sceneId = 'classic';
     state.playlist = (state.playlist || []).filter((t) => t && t.path && fs.existsSync(t.path));
     if (state.currentTrack >= state.playlist.length) state.currentTrack = 0;
   } catch {

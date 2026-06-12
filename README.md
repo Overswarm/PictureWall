@@ -54,7 +54,7 @@ Supported image types: JPG, PNG, GIF, WebP, BMP, AVIF.
 | 📸 **Polaroid Pile** | Snapshots tumble onto the table and pile up, covering older ones. Has its own *photo drop rate*. |
 | 🧩 **Photo Wall** | A grid of tiles that flip to new photos on every beat, with a color wash that rides the music. |
 | 🎠 **Carousel** | Photos orbit the screen, each swinging up front for its moment. The front card bounces on the beat. |
-| 🌃 **City Drive** | An endless night drive down a winding neon street — photos appear on billboards, angled roadside signs, and as murals on the buildings you pass. Speed rides the music. |
+| 🎆 **Fireworks** | Rockets climb into the night sky and explode into showers of sparks — every burst blooms into one of your photos. Launches ride the beat. |
 | 🎈 **Floating Lights** | Photos drift upward like glowing lanterns over a bokeh sky. |
 | ❄️ **Snowfall** | Photos drift gently down through falling snow on a quiet winter night. |
 | 📖 **Photo Book** | A big photo album lies open on the table, its pages turning to the music — each turn reveals new photos, front and back, like a real book. |
