@@ -16,7 +16,8 @@
     "appId": "com.picturewall.app",
     "productName": "PictureWall",
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
     "files": [
       "main.js",
@@ -27,11 +28,16 @@
       "target": [
         "portable",
         "nsis"
-      ]
+      ],
+      "icon": "build/icon.png"
+    },
+    "portable": {
+      "artifactName": "PictureWall-portable.exe"
     },
     "nsis": {
       "oneClick": true,
-      "perMachine": false
+      "perMachine": false,
+      "artifactName": "PictureWall-setup.exe"
     }
   }
 }

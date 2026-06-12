@@ -81,17 +81,31 @@ All settings are remembered between runs.
 | **Space** | Play / pause music |
 | Double-click | Toggle fullscreen |
 
-## Building a standalone .exe (optional)
+## Building a standalone .exe (for sharing / offline use)
 
-If you want a single installer/portable exe so the event PC doesn't need
-Node.js:
+To turn PictureWall into a single file you can hand to anyone — no Node.js,
+no install, no internet connection needed on the machine that runs it:
 
 ```bash
 npm install
 npm run dist
 ```
 
-The installer and a portable `.exe` land in the `dist/` folder.
+This needs internet **once** (it downloads the packaging tools), then drops
+two things into the `dist/` folder:
+
+- **`PictureWall-portable.exe`** — one self-contained file (~90 MB). Copy it
+  to a USB stick, a laptop at the venue, anywhere. Double-click and it runs.
+  This is the one to share.
+- **`PictureWall-setup.exe`** — a one-click installer, if you'd rather have
+  it installed with a Start-menu entry.
+
+> ⚠️ **First-run note for whoever you share it with:** because the exe isn't
+> code-signed, Windows SmartScreen may show *"Windows protected your PC"* the
+> first time. Click **More info → Run anyway**. This only happens once.
+
+Settings live in the user's profile, so the portable exe remembers its
+configuration between runs on the same machine.
 
 ## Running from source (any OS)
 
