@@ -11,6 +11,24 @@ into the folder, and watch them show up on the wall moments later.
 
 ---
 
+## Easiest way to run it (Windows 11 — no install, no internet)
+
+**Just double-click `PictureWall.exe`** in this folder.
+
+That's the whole thing. It's a single self-contained program (~86 MB) — no
+Node.js, no setup, no internet connection needed. Copy it to a USB / external
+drive, hand the drive to anyone, and they double-click `PictureWall.exe` to
+run it. Your settings are remembered between runs on each machine.
+
+> ⚠️ **First-run note:** because the app isn't code-signed, Windows 11 may show
+> a blue *"Windows protected your PC"* box the first time. Click
+> **More info → Run anyway**. This only happens once per machine.
+
+Everything below is for people who want to run it from source or rebuild the
+exe themselves — most users can ignore it.
+
+---
+
 ## Quick start (Windows)
 
 1. Install **Node.js** from [nodejs.org](https://nodejs.org) (the **LTS** version) if you don't have it.
